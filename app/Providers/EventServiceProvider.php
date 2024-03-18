@@ -4,16 +4,18 @@ namespace App\Providers;
 
 use App\Events\CreateTransactionEvent;
 use App\Events\CreateUserEvent;
-use App\Events\DeleteUserEvent;
 use App\Events\DepositEvent;
 use App\Events\UpdateUserEvent;
 use App\Listeners\AlterStatusDepositListener;
 use App\Listeners\AlterStatusTransactionListener;
+use App\Listeners\CheckSendNotificationListener;
 use App\Listeners\CheckTransactionAvailabilityListener;
+use App\Listeners\CreateNotificationsListener;
 use App\Listeners\CreateTransactionListener;
 use App\Listeners\CreateUserListener;
 use App\Listeners\CreateWalletListener;
 use App\Listeners\DepositListener;
+use App\Listeners\SendNotificationListener;
 use App\Listeners\UpdateUserListener;
 use App\Listeners\ValueEntryToWalletAfterTransactionListener;
 use App\Listeners\ValueEntryToWalletListener;
@@ -35,7 +37,6 @@ class EventServiceProvider extends ServiceProvider
         UpdateUserEvent::class => [
             UpdateUserListener::class,
         ],
-        DeleteUserEvent::class => [],
         DepositEvent::class => [
             DepositListener::class,
             ValueEntryToWalletListener::class,
@@ -47,6 +48,9 @@ class EventServiceProvider extends ServiceProvider
             CheckTransactionAvailabilityListener::class,
             ValueEntryToWalletAfterTransactionListener::class,
             AlterStatusTransactionListener::class,
+            CreateNotificationsListener::class,
+            CheckSendNotificationListener::class,
+            SendNotificationListener::class,
         ],
     ];
 

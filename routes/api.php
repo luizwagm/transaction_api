@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'all']);
+    Route::get('/notifications/{id}', [UserController::class, 'notifications']);
     Route::get('/{id}', [UserController::class, 'get']);
     Route::post('/', [UserController::class, 'create']);
     Route::put('/{id}', [UserController::class, 'update']);

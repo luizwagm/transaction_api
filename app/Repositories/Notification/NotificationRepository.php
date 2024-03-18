@@ -4,6 +4,7 @@ namespace App\Repositories\Notification;
 
 use App\Http\Requests\Notification\NotificationRequest;
 use App\Models\Notification;
+use Illuminate\Database\Eloquent\Collection;
 
 class NotificationRepository implements NotificationRepositoryInterface
 {
@@ -15,6 +16,17 @@ class NotificationRepository implements NotificationRepositoryInterface
     public function __construct(
         protected Notification $model
     ) {}
+
+    /**
+     * Get all notifications function
+     *
+     * @param integer $userId
+     * @return Collection
+     */
+    public function get(int $userId): Collection
+    {
+        return $this->model->where('user_id', $userId)->get();
+    }
 
     /**
      * Send email or sms function
@@ -41,7 +53,7 @@ class NotificationRepository implements NotificationRepositoryInterface
      * @param integer $id
      * @return boolean
      */
-    public function updateStatusSent(int $id): bool
+    public function updateStatusSent(int $id): Notification
     {
         $get = $this->model->find($id);
 
@@ -57,7 +69,7 @@ class NotificationRepository implements NotificationRepositoryInterface
      * @param integer $id
      * @return boolean
      */
-    public function updateStatusNotSend(int $id): bool
+    public function updateStatusNotSend(int $id): Notification
     {
         $get = $this->model->find($id);
 

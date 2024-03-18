@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Http\Requests\Transaction\TransactionRequest;
+use App\Models\Notification;
 use Illuminate\Foundation\Events\Dispatchable;
 
 class CreateTransactionEvent
@@ -15,6 +16,20 @@ class CreateTransactionEvent
      * @var integer
      */
     public int $id;
+
+    /**
+     * $sms variable
+     *
+     * @var Notification
+     */
+    public Notification $sms;
+
+    /**
+     * $email variable
+     *
+     * @var Notification
+     */
+    public Notification $email;
 
     /**
      * Constructs function
@@ -34,5 +49,27 @@ class CreateTransactionEvent
     public function setTransactionId(int $transactionId)
     {
         $this->id = $transactionId;
+    }
+
+    /**
+     * Set sms notification function
+     *
+     * @param Notification $notification
+     * @return void
+     */
+    public function setSms(Notification $notification)
+    {
+        $this->sms = $notification;
+    }
+
+    /**
+     * Set email notification function
+     *
+     * @param Notification $notification
+     * @return void
+     */
+    public function setEmail(Notification $notification)
+    {
+        $this->email = $notification;
     }
 }

@@ -26,7 +26,6 @@ class NotificationRequest extends FormRequest
             'notification_type' => 'required',
             'title' => 'required',
             'message' => 'required',
-            'status' => 'required',
         ];
     }
 }

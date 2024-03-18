@@ -21,4 +21,12 @@ interface UserServiceInterface
      * @return User
      */
     public function get(int $id): User;
+
+    /**
+     * Get all notifications function
+     *
+     * @param integer $id
+     * @return Collection
+     */
+    public function notifications(int $id): Collection;
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\UserRequest;
 use App\Http\Resources\User\AllUserResource;
 use App\Http\Resources\User\CreatedUserResource;
+use App\Http\Resources\User\GetNotificationsResource;
 use App\Http\Resources\User\GetUserResource;
 use App\Http\Resources\User\UpdatedUserResource;
 use App\Services\User\UserServiceInterface;
@@ -27,9 +28,9 @@ class UserController extends Controller
      * Create user function
      *
      * @param UserRequest $request
-     * @return void
+     * @return CreatedUserResource
      */
-    public function create(UserRequest $request)
+    public function create(UserRequest $request): CreatedUserResource
     {
         CreateUserEvent::dispatch($request);
 
@@ -41,9 +42,9 @@ class UserController extends Controller
      *
      * @param UpdateUserRequest $request
      * @param integer $id
-     * @return void
+     * @return UpdatedUserResource
      */
-    public function update(UpdateUserRequest $request, int $id)
+    public function update(UpdateUserRequest $request, int $id): UpdatedUserResource
     {
         UpdateUserEvent::dispatch( 
             [
@@ -58,9 +59,9 @@ class UserController extends Controller
     /**
      * Get all users function
      *
-     * @return void
+     * @return AllUserResource
      */
-    public function all()
+    public function all(): AllUserResource
     {
         return new AllUserResource($this->service->all());
     }
@@ -69,10 +70,21 @@ class UserController extends Controller
      * Get user function
      *
      * @param integer $id
-     * @return void
+     * @return GetUserResource
      */
-    public function get(int $id)
+    public function get(int $id): GetUserResource
     {
         return new GetUserResource($this->service->get($id));
+    }
+
+    /**
+     * Get all notifications function
+     *
+     * @param integer $id
+     * @return GetNotificationsResource
+     */
+    public function notifications(int $id): GetNotificationsResource
+    {
+        return new GetNotificationsResource($this->service->notifications($id));
     }
 }
