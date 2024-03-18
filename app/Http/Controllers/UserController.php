@@ -12,6 +12,7 @@ use App\Http\Resources\User\GetNotificationsResource;
 use App\Http\Resources\User\GetUserResource;
 use App\Http\Resources\User\UpdatedUserResource;
 use App\Services\User\UserServiceInterface;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
@@ -25,24 +26,89 @@ class UserController extends Controller
     ) {}
 
     /**
-     * Create user function
-     *
-     * @param UserRequest $request
-     * @return CreatedUserResource
+    * @OA\Post(
+     *     path="/api/user",
+     *     summary="Create a new user",
+     *     tags={"User"},
+     *     @OA\Parameter(
+     *         name="fullname",
+     *         in="query",
+     *         description="User's fullname",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="document",
+     *         in="query",
+     *         description="User's document",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="User's email",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         description="User's password",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="user_type",
+     *         in="query",
+     *         description="User type",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *             enum={
+     *                   "common",
+     *                   "shopman",
+     *             },
+     *         )
+     *     ),
+     *     @OA\Response(response="201", description="User registered successfully")
+     * )
      */
-    public function create(UserRequest $request): CreatedUserResource
+    public function create(UserRequest $request): JsonResponse
     {
         CreateUserEvent::dispatch($request);
 
-        return new CreatedUserResource($request);        
+        return response()->json(new CreatedUserResource($request), 201);        
     }
 
     /**
-     * Edit user function
-     *
-     * @param UpdateUserRequest $request
-     * @param integer $id
-     * @return UpdatedUserResource
+    * @OA\Put(
+     *     path="/api/user/{id}",
+     *     summary="Update user",
+     *     tags={"User"},
+     *     @OA\Parameter(
+     *         name="fullname",
+     *         in="query",
+     *         description="User's fullname",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         description="User's password",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="User's id",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response="200", description="User updated successfully")
+     * )
      */
     public function update(UpdateUserRequest $request, int $id): UpdatedUserResource
     {
@@ -57,9 +123,12 @@ class UserController extends Controller
     }
 
     /**
-     * Get all users function
-     *
-     * @return AllUserResource
+    * @OA\Get(
+     *     path="/api/user",
+     *     tags={"User"},
+     *     summary="Get all user with wallet",
+     *     @OA\Response(response="200", description="Get all user with wallet")
+     * )
      */
     public function all(): AllUserResource
     {
@@ -67,10 +136,19 @@ class UserController extends Controller
     }
 
     /**
-     * Get user function
-     *
-     * @param integer $id
-     * @return GetUserResource
+    * @OA\Get(
+     *     path="/api/user/{id}",
+     *     summary="Get user with wallet",
+     *     tags={"User"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="User's id",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response="200", description="Get user with wallet")
+     * )
      */
     public function get(int $id): GetUserResource
     {
@@ -78,10 +156,19 @@ class UserController extends Controller
     }
 
     /**
-     * Get all notifications function
-     *
-     * @param integer $id
-     * @return GetNotificationsResource
+    * @OA\Get(
+     *     path="/api/user/notifications/{id}",
+     *     summary="Get all notifications of user",
+     *     tags={"User"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="User's id",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response="200", description="Get all notifications of user")
+     * )
      */
     public function notifications(int $id): GetNotificationsResource
     {

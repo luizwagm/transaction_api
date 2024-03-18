@@ -3,6 +3,7 @@
 use App\Http\Controllers\FinancialDepositController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->group(function () {
@@ -21,4 +22,11 @@ Route::prefix('deposit')->group(function () {
 Route::prefix('transaction')->group(function () {
     Route::get('/{walletId}/{user}', [TransactionController::class, 'get']);
     Route::post('/', [TransactionController::class, 'transaction']);
+});
+
+Route::get('/hello', function (Request $request) {
+    return response()->json([
+        "code" => 200,
+        "message" => 'Hello World'
+    ]);
 });

@@ -1,0 +1,326 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Transaction API",
+        "version": "0.0.1"
+    },
+    "paths": {
+        "/api/deposit": {
+            "post": {
+                "tags": [
+                    "Deposit"
+                ],
+                "summary": "Create a new deposit",
+                "operationId": "862fdb3026143899c4f25681941be083",
+                "parameters": [
+                    {
+                        "name": "wallet_id",
+                        "in": "query",
+                        "description": "Id of wallet to deposit",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "query",
+                        "description": "Value of deposit",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Deposit registered successfully"
+                    }
+                }
+            }
+        },
+        "/api/deposit/{walletId}": {
+            "get": {
+                "tags": [
+                    "Deposit"
+                ],
+                "summary": "Get all deposits of user",
+                "operationId": "bef17281d460575c3b8c11a23f99256e",
+                "parameters": [
+                    {
+                        "name": "walletId",
+                        "in": "path",
+                        "description": "Id of wallet",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get all deposits of user"
+                    }
+                }
+            }
+        },
+        "/api/transaction": {
+            "post": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Create a new transaction",
+                "operationId": "a947eae7cb01b1734fe0c9825a0115cb",
+                "parameters": [
+                    {
+                        "name": "wallet_id",
+                        "in": "query",
+                        "description": "Id of wallet to payer",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "destination_wallet_id",
+                        "in": "query",
+                        "description": "Id of wallet to payee",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "query",
+                        "description": "Value of transaction",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Transaction registered successfully"
+                    }
+                }
+            }
+        },
+        "/api/transaction/{walletId}/{user}": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Get all transactions of user",
+                "operationId": "9b73afc832a177d589a193fa5fca3c9b",
+                "parameters": [
+                    {
+                        "name": "walletId",
+                        "in": "path",
+                        "description": "Id of wallet",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "User type",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "payer",
+                                "payee"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get all transactions of user"
+                    }
+                }
+            }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get all user with wallet",
+                "operationId": "74a51985aa8ca65de0bab1b1065a2f3f",
+                "responses": {
+                    "200": {
+                        "description": "Get all user with wallet"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create a new user",
+                "operationId": "7c2f70a3743c58ead609cd340889444b",
+                "parameters": [
+                    {
+                        "name": "fullname",
+                        "in": "query",
+                        "description": "User's fullname",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "document",
+                        "in": "query",
+                        "description": "User's document",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "User's email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User's password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_type",
+                        "in": "query",
+                        "description": "User type",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "common",
+                                "shopman"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User registered successfully"
+                    }
+                }
+            }
+        },
+        "/api/user/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get user with wallet",
+                "operationId": "dde3b520ad58acc2b220cdf71d2166ac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get user with wallet"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user",
+                "operationId": "5e09c26a0abb2b1bf040badb2d9c69ba",
+                "parameters": [
+                    {
+                        "name": "fullname",
+                        "in": "query",
+                        "description": "User's fullname",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User's password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully"
+                    }
+                }
+            }
+        },
+        "/api/user/notifications/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get all notifications of user",
+                "operationId": "479e6f162a897d64b827397eb0e61efd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User's id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get all notifications of user"
+                    }
+                }
+            }
+        }
+    }
+}
