@@ -20,7 +20,7 @@ interface WalletRepositoryInterface
      * Create function
      *
      * @param WalletRequest $request
-     * @return Wallet
+     * @return Wallet|Exception
      */
     public function create(WalletRequest $request): Wallet|Exception;
 
@@ -36,17 +36,25 @@ interface WalletRepositoryInterface
      * ValueEntry function
      *
      * @param integer $id
-     * @param WalletRequest $request
+     * @param int $value
      * @return Wallet
      */
-    public function valueEntry(int $id, WalletRequest $request): Wallet;
+    public function valueEntry(int $id, float $value): Wallet;
 
     /**
      * ValueOutput function
      *
      * @param integer $id
-     * @param WalletRequest $request
+     * @param int $value
      * @return Wallet
      */
-    public function valueOutput(int $id, WalletRequest $request): Wallet;
+    public function valueOutput(int $id, float $value): Wallet;
+
+    /**
+     * find function
+     *
+     * @param integer $id
+     * @return Wallet
+     */
+    public function find(int $id): Wallet|Exception;
 }

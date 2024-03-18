@@ -8,21 +8,13 @@ use App\Models\Notification;
 class NotificationRepository implements NotificationRepositoryInterface
 {
     /**
-     * $model variable
-     *
-     * @var Notification
-     */
-    protected Notification $model;
-
-    /**
      * Construct function
      *
      * @param Notification $notificatio
      */
-    public function __construct(Notification $notificatio)
-    {
-        $this->model = $notificatio;
-    }
+    public function __construct(
+        protected Notification $model
+    ) {}
 
     /**
      * Send email or sms function

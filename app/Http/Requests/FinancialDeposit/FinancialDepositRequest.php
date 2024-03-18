@@ -24,7 +24,6 @@ class FinancialDepositRequest extends FormRequest
         return [
             'wallet_id' => 'required',
             'value' => 'required',
-            'status' => 'required',
         ];
     }
 }

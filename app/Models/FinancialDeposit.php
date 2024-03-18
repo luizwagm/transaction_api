@@ -24,7 +24,7 @@ class FinancialDeposit extends Model
         'value',
         'status',
     ];
-
+    
     /**
      * Relationship belongs to with wallet model
      *

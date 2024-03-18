@@ -3,25 +3,34 @@
 namespace App\Events;
 
 use App\Http\Requests\User\UserRequest;
-use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 
 class CreateUserEvent
 {
     use Dispatchable;
 
-    public UserRequest $user;
+    /**
+     * $userId variable
+     *
+     * @var integer
+     */
     public int $userId;
 
     /**
-     * Create a new event instance.
+     * Constructs function
+     *
+     * @param UserRequest $user
      */
-    public function __construct(UserRequest $request)
-    {
-        $this->user = $request;
-    }
+    public function __construct(
+        public UserRequest $user
+    ) {}
 
+    /**
+     * set userId function
+     *
+     * @param integer $userId
+     * @return void
+     */
     public function setUserId(int $userId)
     {
         $this->userId = $userId;

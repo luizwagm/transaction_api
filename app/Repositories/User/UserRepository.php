@@ -11,21 +11,13 @@ use Illuminate\Database\Eloquent\Collection;
 class UserRepository implements UserRepositoryInterface
 {
     /**
-     * $modal variable
-     *
-     * @var User
-     */
-    protected User $model;
-
-    /**
      * Construct function
      *
      * @param User $user
      */
-    public function __construct(User $user)
-    {
-        $this->model = $user;
-    }
+    public function __construct(
+        protected User $model
+    ) {}
 
     /**
      * Get function
@@ -35,7 +27,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function get(int $id): User
     {
-        return $this->model->find($id);
+        return $this->model->with('wallet')->find($id);
     }
 
     /**

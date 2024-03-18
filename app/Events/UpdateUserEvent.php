@@ -15,7 +15,7 @@ class UpdateUserEvent
     /**
      * Create a new event instance.
      */
-    public function __construct($data)
+    public function __construct(array $data)
     {
         $this->user = $data['user'];
         $this->id = $data['id'];

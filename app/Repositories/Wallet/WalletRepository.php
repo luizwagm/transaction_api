@@ -9,21 +9,13 @@ use Exception;
 class WalletRepository implements WalletRepositoryInterface
 {
     /**
-     * $model variable
-     *
-     * @var Wallet
-     */
-    protected Wallet $model;
-
-    /**
      * Construct function
      *
      * @param Wallet $wallet
      */
-    public function __construct(Wallet $wallet)
-    {
-        $this->model = $wallet;
-    }
+    public function __construct(
+        protected Wallet $model
+    ) {}
 
     /**
      * Get function
@@ -40,7 +32,7 @@ class WalletRepository implements WalletRepositoryInterface
      * Create function
      *
      * @param WalletRequest $request
-     * @return Wallet
+     * @return Wallet|Exception
      */
     public function create(WalletRequest $request): Wallet|Exception
     {
@@ -72,13 +64,13 @@ class WalletRepository implements WalletRepositoryInterface
      * ValueEntry function
      *
      * @param integer $id
-     * @param WalletRequest $request
+     * @param int $value
      * @return Wallet
      */
-    public function valueEntry(int $id, WalletRequest $request): Wallet
+    public function valueEntry(int $id, float $value): Wallet
     {
         $get = $this->model->find($id);
-        $get->amount = $get->amount + $request->value_entry;
+        $get->amount = $get->amount + $value;
         $get->save();
 
         return $get;
@@ -88,15 +80,30 @@ class WalletRepository implements WalletRepositoryInterface
      * ValueOutput function
      *
      * @param integer $id
-     * @param WalletRequest $request
+     * @param int $value
      * @return Wallet
      */
-    public function valueOutput(int $id, WalletRequest $request): Wallet
+    public function valueOutput(int $id, float $value): Wallet
     {
         $get = $this->model->find($id);
-        $get->amount = $get->amount - $request->value_entry;
+        $get->amount = $get->amount - $value;
         $get->save();
 
         return $get;
+    }
+
+    /**
+     * find function
+     *
+     * @param integer $id
+     * @return Wallet
+     */
+    public function find(int $id): Wallet|Exception
+    {
+        try {
+            return $this->model->find($id);
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 }

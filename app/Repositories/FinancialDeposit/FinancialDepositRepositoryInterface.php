@@ -4,6 +4,7 @@ namespace App\Repositories\FinancialDeposit;
 
 use App\Http\Requests\FinancialDeposit\FinancialDepositRequest;
 use App\Models\FinancialDeposit;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
 interface FinancialDepositRepositoryInterface
@@ -20,9 +21,9 @@ interface FinancialDepositRepositoryInterface
      * Deposit to wallet function
      *
      * @param FinancialDepositRequest $request
-     * @return FinancialDeposit
+     * @return FinancialDeposit|Exception
      */
-    public function deposit(FinancialDepositRequest $request): FinancialDeposit;
+    public function deposit(FinancialDepositRequest $request): FinancialDeposit|Exception;
 
     /**
      * Update to completed status function
@@ -30,7 +31,7 @@ interface FinancialDepositRepositoryInterface
      * @param integer $id
      * @return boolean
      */
-    public function updateCompleted(int $id): bool;
+    public function updateCompleted(int $id): FinancialDeposit;
 
     /**
      * Update to failed status function
@@ -38,5 +39,5 @@ interface FinancialDepositRepositoryInterface
      * @param integer $id
      * @return boolean
      */
-    public function updateFailed(int $id): bool;
+    public function updateFailed(int $id): FinancialDeposit;
 }

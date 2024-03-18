@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('financial_deposits', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Wallet::class);
-            $table->double('value');
+            $table->decimal('value');
             $table->string('status');
             $table->timestamps();
         });

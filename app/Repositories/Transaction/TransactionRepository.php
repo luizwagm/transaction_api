@@ -9,21 +9,13 @@ use Illuminate\Database\Eloquent\Collection;
 class TransactionRepository implements TransactionRepositoryInterface
 {
     /**
-     * $model variable
-     *
-     * @var Transaction
-     */
-    protected Transaction $model;
-
-    /**
      * Construct function
      *
      * @param Transaction $transaction
      */
-    public function __construct(Transaction $transaction)
-    {
-        $this->model = $transaction;
-    }
+    public function __construct(
+        protected Transaction $model
+    ) {}
 
     /**
      * Get function

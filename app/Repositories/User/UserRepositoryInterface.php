@@ -22,7 +22,7 @@ interface UserRepositoryInterface
      * Create function
      *
      * @param UserRequest $request
-     * @return User
+     * @return User|Exception
      */
     public function create(UserRequest $request): User|Exception;
 

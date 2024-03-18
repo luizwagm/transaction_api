@@ -26,7 +26,6 @@ class TransactionRequest extends FormRequest
             'destination_wallet_id' => 'required',
             'description' => '',
             'value' => 'required',
-            'status' => 'required',
         ];
     }
 }
