@@ -11,7 +11,7 @@ class WalletNotAmountException extends Exception
         return response()->json(
             [
                 "error" => true,
-                "message" => "Financial transaction with no value in the wallet"
+                "message" => "Financial transaction without value in the wallet"
             ]
         );
     }

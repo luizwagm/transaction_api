@@ -29,9 +29,9 @@ class TransactionService implements TransactionServiceInterface
      * @param integer $walletId
      * @return Collection
      */
-    public function get(int $walletId): Collection
+    public function get(int $walletId, string $user): Collection
     {
-        return $this->repository->get($walletId);
+        return $this->repository->get($walletId, $user);
     }
 
     /**

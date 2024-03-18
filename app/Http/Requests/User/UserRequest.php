@@ -29,11 +29,4 @@ class UserRequest extends FormRequest
             'user_type' => 'required|in:common,shopman',
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'document.unique' => 'Não pode repetir',
-        ];
-    }
 }

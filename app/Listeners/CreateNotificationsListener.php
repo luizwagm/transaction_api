@@ -22,27 +22,30 @@ class CreateNotificationsListener
      */
     public function handle($event)
     {
-        $wallet = $this->walletRepository->find($event?->request?->destination_wallet_id);
-
-        $notificationRequestSms = new NotificationRequest(
-            [
-                'user_id' => $wallet?->user?->id,
-                'notification_type' => 'sms',
-                'title' => 'Status',
-                'message' => 'Financial transaction sending',
-            ]
-        );
-
-        $notificationRequestEmail = new NotificationRequest(
-            [
-                'user_id' => $wallet?->user?->id,
-                'notification_type' => 'email',
-                'title' => 'Status',
-                'message' => 'Financial transaction sending',
-            ]
-        );
+        $notificationRequestSms = new NotificationRequest($this->payload($event, 'sms'));
+        $notificationRequestEmail = new NotificationRequest($this->payload($event, 'email'));
 
         $event->setSms($this->notificationRepository->send($notificationRequestSms));
         $event->setEmail($this->notificationRepository->send($notificationRequestEmail));
+    }
+
+    /**
+     * Create a body of payload function
+     *
+     * @param [type] $event
+     * @param string $type
+     * @return array
+     */
+    private function payload($event, $type = 'email')
+    {
+        $walletPayee = $this->walletRepository->find($event?->request?->destination_wallet_id);
+        $walletPayer = $this->walletRepository->find($event?->request?->wallet_id);
+
+        return [
+                'user_id' => $walletPayee?->user?->id,
+                'notification_type' => $type,
+                'title' => 'Status',
+                'message' => 'Financial transaction received by ' . $walletPayer?->user?->fullname,
+            ];
     }
 }

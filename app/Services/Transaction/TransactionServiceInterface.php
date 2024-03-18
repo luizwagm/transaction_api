@@ -13,7 +13,7 @@ interface TransactionServiceInterface
      * @param integer $walletId
      * @return Collection
      */
-    public function get(int $walletId): Collection;
+    public function get(int $walletId, string $user): Collection;
 
     /**
      * Execute creation transaction function

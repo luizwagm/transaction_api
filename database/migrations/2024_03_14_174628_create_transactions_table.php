@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Wallet::class, 'wallet_id');
             $table->foreignIdFor(Wallet::class, 'destination_wallet_id');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->decimal('value');
             $table->string('status');
             $table->timestamps();
