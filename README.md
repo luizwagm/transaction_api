@@ -27,4 +27,10 @@ APP_PORT=8080 ./vendor/bin/sail up -d
 
 [http://localhost:8080/api/documentation](http://localhost:8080/api/documentation)
 
+## Tests
 
+```shell
+./vendo/bin/sail artisan test
+
+./vendo/bin/sail artisan test --coverage
+```
