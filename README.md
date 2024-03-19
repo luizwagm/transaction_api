@@ -20,7 +20,6 @@ APP_PORT=8080 ./vendor/bin/sail up -d
 
 ## Access
 
-
 [http://localhost:8080](http://localhost:8080)
 
 
