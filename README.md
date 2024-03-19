@@ -3,7 +3,9 @@
 ## Requirements
 
 PHP >8.2
+
 Composer
+
 Docker
 
 ## Installation
@@ -22,7 +24,7 @@ APP_PORT=8080 ./vendor/bin/sail up -d
 http://localhost:8080
 `
 
-# Documentation swagger
+## Documentation swagger
 `
 http://localhost:8080/api/documentation
 `
