@@ -232,6 +232,14 @@
                                 "schema": {}
                             }
                         }
+                    },
+                    "422": {
+                        "description": "Do not create an existing user",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }

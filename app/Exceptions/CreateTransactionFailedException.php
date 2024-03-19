@@ -12,7 +12,8 @@ class CreateTransactionFailedException extends Exception
             [
                 "error" => true,
                 "message" => "Financial transaction permitted only for common users"
-            ]
+            ],
+            422
         );
     }   
 }

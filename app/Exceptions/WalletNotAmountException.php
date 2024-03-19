@@ -12,7 +12,8 @@ class WalletNotAmountException extends Exception
             [
                 "error" => true,
                 "message" => "Financial transaction without value in the wallet"
-            ]
+            ],
+            422
         );
     }
 }

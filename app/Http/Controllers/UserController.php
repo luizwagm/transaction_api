@@ -71,7 +71,8 @@ class UserController extends Controller
      *             },
      *         )
      *     ),
-     *     @OA\Response(response="201", description="User registered successfully", @OA\JsonContent())
+     *     @OA\Response(response="201", description="User registered successfully", @OA\JsonContent()),
+     *     @OA\Response(response="422", description="Do not create an existing user", @OA\JsonContent())
      * )
      */
     public function create(UserRequest $request): JsonResponse
